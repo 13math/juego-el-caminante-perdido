@@ -69,6 +69,11 @@
             font-size: 1.2em;
             margin-top: 10px;
         }
+        .equation {
+            font-size: 1.5em;
+            margin: 15px 0;
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -76,6 +81,7 @@
     <p>Ayuda al caminante a llegar al final resolviendo las ecuaciones.</p>
     <div class="game-container">
         <div class="path" id="path"></div>
+        <p class="equation" id="equation"></p>
         <input type="text" id="answer" placeholder="Ingresa tu respuesta">
         <button onclick="checkAnswer()">Enviar</button>
         <p class="feedback" id="feedback"></p>
@@ -87,6 +93,7 @@
         let currentProblem = generateProblem();
 
         const pathElement = document.getElementById('path');
+        const equationElement = document.getElementById('equation');
         const feedbackElement = document.getElementById('feedback');
 
         function generateProblem() {
@@ -108,6 +115,10 @@
                 }
                 pathElement.appendChild(span);
             }
+        }
+
+        function updateEquation() {
+            equationElement.textContent = `Resuelve: ${currentProblem.equation}`;
         }
 
         function checkAnswer() {
@@ -137,6 +148,7 @@
             }
 
             updatePath();
+            updateEquation();
             document.getElementById('answer').value = '';
         }
 
@@ -146,10 +158,12 @@
                 currentProblem = generateProblem();
                 feedbackElement.textContent = '';
                 updatePath();
+                updateEquation();
             }, 3000);
         }
 
         updatePath();
+        updateEquation();
     </script>
 </body>
 </html>
